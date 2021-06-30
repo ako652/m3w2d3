@@ -11,11 +11,24 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
     <div class="container">
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Strive CRUD Agenda</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="./index2.html">Backoffice</a>
+            </div>
+        </div>
+            <div class="row">
+
+                <div id="currentEvents" class="card" style="width: 18rem;">
+              
+                <img id= "imageUrl"src="" alt="">
                 <div class="card-body">
                   <h5 id= "name"class="card-title">Card title</h5>
                   <p id="description" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -26,37 +39,21 @@
               </div>
         </div>
     </div>
+    
 
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
    <script>
-  const getData = async (events) => {
-   
-            
+ 
 
-            const  url = "https://striveschool-api.herokuapp.com/api/product/"
-
-            const myEvent = {
-               
-                
-
-                name: document.getElementById("name"), 
-                description: document.getElementById("description"), 
-                brand: document.getElementById("brand"),
-                imageUrl: document.getElementById("image"),
-                price: document.getElementById("price"), 
-               
-            }
+ const getData = async (url) => {
             try {
-                const response = await fetch(url, {
-                    method: 'POST',
-       body: JSON.stringify(myEvent),
-        headers: {
-    'Content-Type': 'application/json',
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGRjNjNmYmIzNTgxNzAwMTVjMjI3MGYiLCJpYXQiOjE2MjUwNTYzOTUsImV4cCI6MTYyNjI2NTk5NX0.HBZLYu70myKI9gN2Ws8VhyMOG_0WgZDtB77ZMnhoS2M",
-
+                const response = await fetch(url, 
+                {
+headers: {
+"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGRjNjA5MmIzNTgxNzAwMTVjMjI3MGIiLCJpYXQiOjE2MjUwNTUzNzksImV4cCI6MTYyNjI2NDk3OX0.GU2lIsiqgCn32sgv0p7ojOBhxmXqY4w22Bx2R_WPZQA"
 }
 })
                 if (!response.ok) throw new Error("Failed to fetch")
@@ -71,21 +68,44 @@
                 console.log("I'm the last thing")
             }
         }
+
         const displayEvents = (events) => {
-        const ul = document.getElementById("currentEvents");
-      };
+            const cards = document.getElementById("currentEvents")
+          
 
-      
+            
+                events.forEach(event => {
+                    cards.innerHTML = cards.innerHTML + ` <div id="currentEvents" class="card" style="width: 18rem;">
+                
+                <div class="card-body">
+                  <h5 id= "name"class="card-title">${event.name}</h5>
+                  <p id="description" class="card-text">${event.description}</p>
+                  <p id="price">${event.price}</p>
+                  <p id="brand">${event.brand}</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>`
+                    
+                })
+            
 
-       
-         
+        }
 
-         
+        window.onload = async () => {
+            const url =  "https://striveschool-api.herokuapp.com/api/product/"
+
+            const events = await getData(url)
+            displayEvents(events)
+
+            
 
 
 
 
 
+
+
+        }
 
 
 
