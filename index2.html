@@ -48,13 +48,80 @@
         <input type="number" class="form-control" id="price" required />
       </div>
       <button type="submit" class="btn btn-secondary">Submit</button>
+
+     <button id="delete-btn" type="button" class="btn btn-danger " onclick="handledit()"> EDIT</button>
     </div>
   </form>
     <script>
+      const eventId = new URLSearchParams(window.location.search).get("id")
+        
+      const endpoint = eventId ? " https://striveschool-api.herokuapp.com/api/product/" + eventId : " https://striveschool-api.herokuapp.com/api/product/"
+      const method = eventId ? "PUT" : "POST"
+      window.onload= async () =>{
+        
+        
+        
+        console.log(eventId)
+        if (eventId){
+         
+
+
+          const response = await fetch(endpoint, {
+                headers: {
+"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGRjNjA5MmIzNTgxNzAwMTVjMjI3MGIiLCJpYXQiOjE2MjUwNTUzNzksImV4cCI6MTYyNjI2NDk3OX0.GU2lIsiqgCn32sgv0p7ojOBhxmXqY4w22Bx2R_WPZQA"
+}
+          })
+          const eventDetails = await response.json()
 
 
 
-         const getProduct = async (event) => {
+               document.getElementById("name").value =eventDetails.name
+                document.getElementById("description").value =eventDetails.description
+                 document.getElementById("brand").value= eventDetails.brand
+                 document.getElementById("imageUrl").value= eventDetails.imageUrl
+                document.getElementById("price").value =eventDetails.price
+               
+       
+        } else {
+
+          
+
+        }
+
+
+
+
+
+
+
+
+
+
+      }
+
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const getProduct = async (event) => {
            event.preventDefault()
         const url= "https://striveschool-api.herokuapp.com/api/product/"
         const myEvent = {
@@ -71,8 +138,8 @@
            
           
           try{
-        const response = await fetch(url,{
-                method: "POST",
+        const response = await fetch(endpoint,{
+            method,
             body: JSON.stringify(myEvent),
             headers: {
               "Content-Type": "application/json",
