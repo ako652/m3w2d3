@@ -11,20 +11,16 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <div class="container">
+    <h1>amazon</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Strive CRUD Agenda</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="./index2.html">Backoffice</a>
-            </div>
+        <div class="container">
+          <a class="navbar-brand" href="#">home</a>
+          <a class="navbar-brand" href="/index2.html">back office</a>
         </div>
-            <div class="row">
+      </nav>
+    
+            <div class="card-group row" >
+                <div class="col">
 
                 <div id="currentEvents" class="card" style="width: 18rem;">
               
@@ -72,10 +68,15 @@ headers: {
         const displayEvents = (events) => {
             const cards = document.getElementById("currentEvents")
           
-
+                  cards.innerHTML=""
             
                 events.forEach(event => {
-                    cards.innerHTML = cards.innerHTML + ` <div id="currentEvents" class="card" style="width: 18rem;">
+                    cards.innerHTML = cards.innerHTML + `
+                    <div class ="container">
+                    <div class="row">
+
+                        <div class="col-4">
+                    <div id="currentEvents" class="card " style="width: 18rem;">
                 
                 <div class="card-body">
                   <h5 id= "name"class="card-title">${event.name}</h5>
@@ -84,6 +85,9 @@ headers: {
                   <p id="brand">${event.brand}</p>
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
+              </div>
+              </div>
+              </div>
               </div>`
                     
                 })
