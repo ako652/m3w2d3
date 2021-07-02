@@ -49,7 +49,7 @@
       </div>
       <button type="submit" class="btn btn-secondary">Submit</button>
 
-     <button id="delete-btn" type="button" class="btn btn-danger " onclick="handledit()"> EDIT</button>
+     <button id="delete-btn" type="button" class="btn btn-danger " onclick="handledit()"> delete</button>
     </div>
   </form>
     <script>
@@ -166,6 +166,29 @@
         console.log("I am the forever curse! You will never get rid of me!")
     }
 }
+
+          handledit=async ()=>{
+            try{
+              const response = await fetch(endpoint,  { method: "DELETE",
+              
+                headers: {
+"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGRjNjA5MmIzNTgxNzAwMTVjMjI3MGIiLCJpYXQiOjE2MjUwNTUzNzksImV4cCI6MTYyNjI2NDk3OX0.GU2lIsiqgCn32sgv0p7ojOBhxmXqY4w22Bx2R_WPZQA"
+} })
+                if (response.ok){
+                  alert("success")
+
+                }else {
+                  alert("try later")
+                }
+
+            }catch(err){
+              console.log(err)
+
+
+
+            }
+            
+          }
       
 
 
